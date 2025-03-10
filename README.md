@@ -37,7 +37,7 @@ Before you begin, ensure you have met the following requirements:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/your-username/tiko_sasa.git
+   git clone https://github.com/Mark-wj/Tiko_sasa.git
    cd tiko_sasa
 
 2. **Install Dependencies**
