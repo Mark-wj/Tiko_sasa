@@ -10,7 +10,7 @@ const Events = () => {
   const [filterKey, setFilterKey] = useState("title");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/accounts/events/")
+    fetch("https://tiko-sasa-backend-production.up.railway.app/api/accounts/events/")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch");

@@ -10,7 +10,7 @@ const Hotels = () => {
   const [filterKey, setFilterKey] = useState("name");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/accounts/hotels/")
+    fetch("https://tiko-sasa-backend-production.up.railway.app/api/accounts/hotels/")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch hotel");
