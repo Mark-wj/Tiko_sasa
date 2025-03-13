@@ -11,7 +11,7 @@ const Home = () => {
   const [hotels, setHotels] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/accounts/movies/")
+    fetch("tiko-sasa-backend-production.up.railway.app/api/accounts/movies/")
     .then((res) => res.json())
     .then((data) => {
       
@@ -21,7 +21,7 @@ const Home = () => {
   }, [])
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/accounts/events/")
+    fetch("tiko-sasa-backend-production.up.railway.app/api/accounts/events/")
     .then((res) => res.json())
     .then((data) => {
       // Assuming data is an array, take the first 4 movies:
@@ -32,7 +32,7 @@ const Home = () => {
   }, [])
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/accounts/hotels/")
+    fetch("tiko-sasa-backend-production.up.railway.app/api/accounts/hotels/")
     .then((res) => res.json())
     .then((data) => {
       // Assuming data is an array, take the first 4 movies:

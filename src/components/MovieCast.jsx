@@ -7,7 +7,7 @@ const MovieDetails = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/accounts/movies/${id}/`)
+    fetch(`tiko-sasa-backend-production.up.railway.app/api/accounts/movies/${id}/`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch movie data");

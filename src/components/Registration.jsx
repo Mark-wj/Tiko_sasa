@@ -16,7 +16,7 @@ const Registration = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
         // Replace with your backend API endpoint
-        const res = await fetch('http://localhost:8000/api/accounts/register/', {
+        const res = await fetch('tiko-sasa-backend-production.up.railway.app/api/accounts/register/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),

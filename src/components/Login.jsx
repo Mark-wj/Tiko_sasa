@@ -12,7 +12,7 @@ const Login = ({ setIsAuthenticated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Replace with your backend API endpoint
-    const res = await fetch('http://localhost:8000/api/accounts/login/', {
+    const res = await fetch('tiko-sasa-backend-production.up.railway.app/api/accounts/login/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),

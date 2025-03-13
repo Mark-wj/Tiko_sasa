@@ -3,9 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 const BannerCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slides = [
-    { id: 1, image: "https://tinyurl.com/yc84bfn8" },
-    { id: 2, image: "https://tinyurl.com/9bmxjcmz" },
-    { id: 3, image: "https://tinyurl.com/ywewwf67" },
+    { id: 1, image: "/public/assets/Breast Cancer Banner Banner 2  6 - Made with PosterMyWall.jpg" },
+    { id: 2, image: "/public/assets/March Madness Tournament Live Match Banner - Made with PosterMyWall.jpg" },
+    { id: 3, image: "/public/assets/New Year Church Theme - Made with PosterMyWall.jpg" },
   ];
 
   const autoSlideInterval = useRef(null);
