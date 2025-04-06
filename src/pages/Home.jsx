@@ -52,87 +52,94 @@ const Home = () => {
   }, []);
 
   return ( 
-    <div>
+    <div className="overflow-x-hidden">
       <BannerCarousel />
-      <div>
-        <div className="w-full max-w-7xl mr-[28%] ml-[5%]">
-          <div className="flex items-center justify-between">
-            <h2 className="text-rose-400 font-extrabold text-3xl">
-              Trending Events
-            </h2>
-            <a href="/events">
-              <button className="px-4 hover:text-rose-400 text-3xl">
-                View more &gt;
-              </button>
-            </a>
-          </div>
-          <Link to="/register">
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {events.map((event) => (
-                <div key={event.id}>
-                  <EventsCard
-                    title={event.title}
-                    venue={event.venue}
-                    date={event.date}
-                    price={event.price}
-                    image={event.image}
-                  />
-                </div>
-              ))}
-            </div>
-          </Link>
+      {/* Events Section */}
+      <div className="px-4 md:px-6 lg:px-8 mx-auto max-w-7xl">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-rose-400 font-extrabold text-xl md:text-2xl lg:text-3xl">
+            Trending Events
+          </h2>
+          <a href="/events">
+            <button className="px-2 md:px-4 hover:text-rose-400 text-lg md:text-xl lg:text-2xl">
+              View more &gt;
+            </button>
+          </a>
         </div>
-      </div>
-      <div className="mt-10">
-         <div className="flex items-center justify-between ml-24 mr-24">
-           <h2 className="text-rose-400 font-extrabold text-3xl">Trending Movies</h2>
-           <a href="/movies">
-             <button className="px-4 text-3xl hover:text-rose-400">
-               View more &gt;
-             </button>
-           </a>
-         </div>
-
         <Link to="/register">
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 ml-24 mr-20">
-            {movies.map((movie) => (
-             <div key={movie.id}>
-                 <MovieCard 
-                   title={movie.title}
-                   genre={movie.genre}
-                   rating={movie.rating}
-                   poster={movie.poster}
-                   price={movie.price}
-                   date={movie.date}
-                 />
-             </div>  
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+            {events.map((event) => (
+              <div key={event.id} className="w-full max-w-[300px] min-w-[250px] h-full">
+                <EventsCard
+                  title={event.title}
+                  venue={event.venue}
+                  date={event.date}
+                  price={event.price}
+                  image={event.image}
+                />
+              </div>
             ))}
           </div>
         </Link>
       </div>
-      <div className="">
-        <div className="mt-10">
-          <div className="flex items-center justify-between mr-24 ml-24">
-            <h2 className="text-rose-400 font-extrabold text-3xl">Trending Hotels</h2>
-            <a href="/hotels">
-              <button className="px-4 hover:text-rose-400 text-3xl">View more &gt;</button>
-            </a>
-          </div>
-          <Link to="/register">
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 ml-24 mr-24">
-              {hotels.map((hotel) => (
-                  <HotelsCard
-                    key={hotel.id}
-                    name={hotel.name}
-                    address={hotel.address}
-                    price={hotel.price}
-                    rating={hotel.rating}
-                    image={hotel.image}
-                  />
-              ))}
-            </div>
-          </Link>
+
+      {/* Movies Section */}
+      <div className="mt-8 px-4 md:px-6 lg:px-8 mx-auto max-w-7xl">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-rose-400 font-extrabold text-xl md:text-2xl lg:text-3xl">
+            Trending Movies
+          </h2>
+          <a href="/movies">
+            <button className="px-2 md:px-4 hover:text-rose-400 text-lg md:text-xl lg:text-2xl">
+              View more &gt;
+            </button>
+          </a>
         </div>
+        <Link to="/register">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+            {movies.map((movie) => (
+              <div key={movie.id} className="w-full max-w-[300px] min-w-[250px] h-full">
+                <MovieCard 
+                  title={movie.title}
+                  genre={movie.genre}
+                  rating={movie.rating}
+                  poster={movie.poster}
+                  price={movie.price}
+                  date={movie.date}
+                />
+              </div>  
+            ))}
+          </div>
+        </Link>
+      </div>
+
+      {/* Hotels Section */}
+      <div className="mt-8 px-4 md:px-6 lg:px-8 mx-auto max-w-7xl">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-rose-400 font-extrabold text-xl md:text-2xl lg:text-3xl">
+            Trending Hotels
+          </h2>
+          <a href="/hotels">
+            <button className="px-2 md:px-4 hover:text-rose-400 text-lg md:text-xl lg:text-2xl">
+              View more &gt;
+            </button>
+          </a>
+        </div>
+        <Link to="/register">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+            {hotels.map((hotel) => (
+              <div key={hotel.id} className="w-full max-w-[300px] min-w-[250px] h-full">
+                <HotelsCard
+                  name={hotel.name}
+                  address={hotel.address}
+                  price={hotel.price}
+                  rating={hotel.rating}
+                  image={hotel.image}
+                />
+              </div>
+            ))}
+          </div>
+        </Link>
       </div>
     </div>
   );
