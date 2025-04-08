@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { 
+  FiArrowLeft, 
+  FiCheckCircle, 
+  FiCalendar,  // Add this
+  FiMapPin     // Add this
+} from "react-icons/fi";
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -73,114 +79,93 @@ const EventDetails = () => {
   const shippingDisplay = (0.0).toFixed(2);
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Event Details Section */}
-      <div className="max-w-8xl mx-auto p-6 bg-white rounded-lg shadow-md mt-4">
-        <h2 className="text-3xl text-rose-500 font-bold mb-4">{event.title}</h2>
-        <div className="flex flex-col md:flex-row items-stretch">
-          <img
-            className="w-full md:w-1/2 object-cover rounded-lg md:mr-6"
-            src={event.image}
-            alt={event.title}
-          />
-          <div className="flex-1 p-4">
-            <p className="text-lg mb-2">
-              <strong>Venue:</strong> {event.venue}
-            </p>
-            <p className="text-lg mb-2">
-              <strong>Date:</strong> {event.date}
-            </p>
-            <p className="text-lg mb-2">
-              <strong>Price:</strong> KES {price.toFixed(2)}
-            </p>
-            <p className="text-lg mb-4">
-              <strong>Tickets Available:</strong> {event.no_of_tickets}
-            </p>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <button
+          onClick={handleGoBack}
+          className="mb-8 flex items-center text-indigo-600 hover:text-indigo-700"
+        >
+          <FiArrowLeft className="mr-2" /> Back to Events
+        </button>
 
-            {/* Checkout / Shopping Cart Section */}
-            <div className="bg-white shadow-md rounded-lg p-6">
-              <h1 className="text-2xl font-semibold mb-6">Shopping Cart</h1>
-              <div className="bg-white rounded-lg p-6">
-                <table className="w-full">
-                  <thead>
-                    <tr>
-                      <th className="text-left font-semibold pb-2 border-b">
-                        Product
-                      </th>
-                      <th className="text-left font-semibold pb-2 border-b">
-                        Price
-                      </th>
-                      <th className="text-left font-semibold pb-2 border-b">
-                        Quantity
-                      </th>
-                      <th className="text-left font-semibold pb-2 border-b">
-                        Total
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-4">
-                        <div className="flex items-center">
-                          <img
-                            className="h-16 w-16 mr-4 rounded"
-                            src={event.image || "https://via.placeholder.com/150"}
-                            alt={event.title}
-                          />
-                          <span className="font-semibold">{event.title}</span>
-                        </div>
-                      </td>
-                      <td className="py-4">${price.toFixed(2)}</td>
-                      <td className="py-4">
-                        <div className="flex items-center">
-                          <button
-                            onClick={handleDecrement}
-                            className="bg-gray-200 text-gray-700 rounded-md px-3 py-1"
-                          >
-                            -
-                          </button>
-                          <span className="mx-3">{quantity}</span>
-                          <button
-                            onClick={handleIncrement}
-                            className="bg-gray-200 text-gray-700 rounded-md px-3 py-1"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </td>
-                      <td className="py-4">
-                        ${(price * quantity).toFixed(2)}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Main Content */}
+          <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm p-6">
+            <div className="mb-8">
+              <h1 className="text-4xl font-bold mb-4">{event.title}</h1>
+              <div className="flex items-center gap-4 text-gray-600">
+                <div className="flex items-center gap-2">
+                  <FiCalendar /> {event.date}
+                </div>
+                <div className="flex items-center gap-2">
+                  <FiMapPin /> {event.venue}
+                </div>
+              </div>
+            </div>
+
+            <img
+              src={event.image}
+              alt={event.title}
+              className="w-full h-96 object-cover rounded-xl mb-8"
+            />
+
+            <div className="prose max-w-none">
+              <h2 className="text-2xl font-semibold mb-4">Event Details</h2>
+              <p>{event.description || "More details coming soon..."}</p>
+            </div>
+          </div>
+
+          {/* Checkout Sidebar */}
+          <div className="sticky top-8 h-fit bg-white rounded-2xl shadow-sm p-6">
+            <h2 className="text-2xl font-bold mb-6">Purchase Tickets</h2>
+            
+            <div className="space-y-6">
+              <div className="bg-indigo-50 rounded-xl p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold">Standard Ticket</h3>
+                  <span className="text-indigo-600 font-bold">KES {price}</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span>Tickets</span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleDecrement}
+                      className="w-8 h-8 rounded-full bg-white border border-gray-300 flex items-center justify-center"
+                    >
+                      -
+                    </button>
+                    <span className="w-8 text-center">{quantity}</span>
+                    <button
+                      onClick={handleIncrement}
+                      className="w-8 h-8 rounded-full bg-white border border-gray-300 flex items-center justify-center"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              {/* Summary Section */}
-              <div className="bg-white rounded-lg p-6 mt-6">
-                <h2 className="text-lg font-semibold mb-4">Summary</h2>
-                <div className="flex justify-between mb-2">
+              <div className="space-y-4">
+                <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span>${subtotalDisplay}</span>
+                  <span>KES {subtotalDisplay}</span>
                 </div>
-                <div className="flex justify-between mb-2">
-                  <span>Taxes</span>
-                  <span>${taxesDisplay}</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                  <span>Shipping</span>
-                  <span>${shippingDisplay}</span>
+                <div className="flex justify-between">
+                  <span>Taxes (10%)</span>
+                  <span>KES {taxesDisplay}</span>
                 </div>
                 <hr className="my-4" />
-                <div className="flex justify-between text-xl font-bold">
+                <div className="flex justify-between font-bold text-lg">
                   <span>Total</span>
-                  <span>${total.toFixed(2)}</span>
+                  <span>KES {total.toFixed(2)}</span>
                 </div>
+                
                 <button
                   onClick={handleCheckout}
-                  className="w-full mt-6 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg"
+                  className="w-full bg-indigo-500 hover:bg-indigo-600 text-white py-3 rounded-xl transition-colors"
                 >
-                  Checkout
+                  Proceed to Checkout
                 </button>
               </div>
             </div>
@@ -188,27 +173,20 @@ const EventDetails = () => {
         </div>
       </div>
 
-      {/* Modal Popup */}
+      {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/3 text-center">
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Coming soon"
-              className="mx-auto mb-4"
-            />
-            <h2 className="text-2xl font-bold mb-2">Coming soon</h2>
-            <p className="mb-4">This feature is under construction.</p>
-            <div className="flex justify-around">
-              <button
-                onClick={handleGoBack}
-                className="bg-green-500 text-white py-2 px-4 rounded-lg"
-              >
-                Go Back
-              </button>
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-2xl p-8 max-w-md text-center">
+            <FiCheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-2">Checkout Coming Soon!</h3>
+            <p className="text-gray-600 mb-6">
+              Our secure checkout system is currently under development.
+              Please check back soon!
+            </p>
+            <div className="flex gap-4 justify-center">
               <button
                 onClick={handleCloseModal}
-                className="bg-red-500 text-white py-2 px-4 rounded-lg"
+                className="px-6 py-2 bg-indigo-500 text-white rounded-full hover:bg-indigo-600"
               >
                 Close
               </button>

@@ -1,105 +1,115 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FiMenu, FiX, FiCalendar, FiFilm, FiHome, FiMail } from "react-icons/fi";
 
 const NavBar = () => {
-  // State to track if the mobile menu is open
   const [isOpen, setIsOpen] = useState(false);
 
-  // Toggle the mobile menu open/close
   const toggleMenu = () => setIsOpen(!isOpen);
-
-  // Close the mobile menu (useful when a link is clicked)
   const closeMenu = () => setIsOpen(false);
 
+  const navLinks = [
+    { to: "/events", text: "Events", icon: <FiCalendar className="mr-2" /> },
+    { to: "/movies", text: "Movies", icon: <FiFilm className="mr-2" /> },
+    { to: "/hotels", text: "Hotels", icon: <FiHome className="mr-2" /> },
+    { to: "/contact", text: "Contact", icon: <FiMail className="mr-2" /> },
+  ];
+
   return (
-    <div className="top-0 py-1 lg:py-2 w-full bg-transparent lg:relative z-50 dark:bg-gray-900">
-      <nav className="z-10 sticky top-0 left-0 right-0 max-w-4xl xl:max-w-5xl mx-auto px-5 py-2.5 lg:border-none lg:py-4">
-        <div className="flex items-center justify-between">
-          <Link to="/">
-            <button>
-              <div className="flex items-center space-x-2">
-                <h2 className="text-black dark:text-white font-bold text-2xl">
-                  🎟️Tiko Sasa
-                </h2>
-              </div>
-            </button>
+    <nav className="w-full bg-gradient-to-r from-blue-600 to-teal-600 shadow-lg fixed top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex items-center space-x-2"
+            onClick={closeMenu}
+          >
+            <span className="text-white text-2xl font-bold tracking-tight">
+              🎟️ Tiko Sasa
+            </span>
           </Link>
 
-          {/* Desktop menu */}
-          <div className="hidden lg:block">
-            <ul className="flex space-x-10 text-base font-bold text-black/60 dark:text-white">
-              <li className="hover:underline hover:underline-offset-4 hover:w-fit transition-all duration-100 ease-linear">
-                <Link to="/events">Events</Link>
-              </li>
-              <li className="hover:underline hover:underline-offset-4 hover:w-fit transition-all duration-100 ease-linear">
-                <Link to="/movies">Movies</Link>
-              </li>
-              <li className="hover:underline hover:underline-offset-4 hover:w-fit transition-all duration-100 ease-linear">
-                <Link to="/hotels">Hotels</Link>
-              </li>
-              <li className="hover:underline hover:underline-offset-4 hover:w-fit transition-all duration-100 ease-linear">
-                <Link to="/contact">Contact</Link>
-              </li>
-            </ul>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-white hover:bg-white/20 px-4 py-2 rounded-lg transition-all duration-300 flex items-center"
+              >
+                {link.icon}
+                {link.text}
+              </Link>
+            ))}
+            <div className="flex space-x-4 ml-4">
+              <Link
+                to="/login"
+                className="bg-white text-blue-600 px-6 py-2 rounded-full font-semibold hover:shadow-lg transition-shadow"
+              >
+                Login
+              </Link>
+            </div>
           </div>
 
-          {/* Hamburger menu for mobile */}
-          <div className="flex items-center justify-center lg:hidden">
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="focus:outline-none text-slate-200 dark:text-white"
+              className="p-2 text-white hover:bg-white/20 rounded-lg transition-colors"
             >
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 20 20"
-                aria-hidden="true"
-                className="text-2xl text-slate-800 dark:text-white focus:outline-none active:scale-110 active:text-red-500"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              {isOpen ? (
+                <FiX className="w-6 h-6" />
+              ) : (
+                <FiMenu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile menu (conditionally rendered) */}
-        {isOpen && (
-          <div className="mt-2 lg:hidden">
-            <ul className="flex flex-col space-y-2 text-base font-bold text-black/60 dark:text-white">
-              <li className="hover:underline hover:underline-offset-4">
-                <Link to="/events" onClick={closeMenu}>
-                  Events
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40">
+          <div className="bg-white h-full w-3/4 max-w-sm ml-auto p-6 transform transition-transform">
+            <div className="flex flex-col h-full">
+              <div className="flex justify-end mb-8">
+                <button
+                  onClick={toggleMenu}
+                  className="p-2 hover:bg-gray-100 rounded-full"
+                >
+                  <FiX className="w-6 h-6 text-gray-600" />
+                </button>
+              </div>
+              
+              <div className="flex flex-col space-y-6">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={closeMenu}
+                    className="text-gray-600 hover:text-blue-600 px-4 py-2 rounded-lg flex items-center text-lg"
+                  >
+                    {link.icon}
+                    {link.text}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="mt-auto pt-8 border-t">
+                <Link
+                  to="/login"
+                  onClick={closeMenu}
+                  className="w-full bg-gradient-to-r from-blue-600 to-teal-600 text-white py-3 px-6 rounded-full text-center font-semibold hover:shadow-lg transition-shadow"
+                >
+                  Get Started
                 </Link>
-              </li>
-              <li className="hover:underline hover:underline-offset-4">
-                <Link to="/movies" onClick={closeMenu}>
-                  Movies
-                </Link>
-              </li>
-              <li className="hover:underline hover:underline-offset-4">
-                <Link to="/hotels" onClick={closeMenu}>
-                  Hotels
-                </Link>
-              </li>
-              <li className="hover:underline hover:underline-offset-4">
-                <Link to="/contact" onClick={closeMenu}>
-                  Contact
-                </Link>
-              </li>
-              {/* Mobile auth buttons (shown only if not logged in) */}
-            </ul>
+              </div>
+            </div>
           </div>
-        )}
-      </nav>
-    </div>
+        </div>
+      )}
+    </nav>
   );
 };
 

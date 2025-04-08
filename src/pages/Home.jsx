@@ -52,7 +52,7 @@ const Home = () => {
   }, []);
 
   return ( 
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden mt-16">
       <BannerCarousel />
       {/* Events Section */}
       <div className="px-4 md:px-6 lg:px-8 mx-auto max-w-7xl">
@@ -126,7 +126,7 @@ const Home = () => {
           </a>
         </div>
         <Link to="/register">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center mr-[10%] ml-[-2%]">
             {hotels.map((hotel) => (
               <div key={hotel.id} className="w-full max-w-[300px] min-w-[250px] h-full">
                 <HotelsCard

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Home from './pages/Home';
 import Events from './pages/Events';
 import Hotels from './pages/Hotels';
@@ -14,43 +14,33 @@ import CheckoutPage from "./pages/checkoutPage.jsx";
 import Footer from "./components/Footer.jsx";
 import Contact from './pages/Contact.jsx';
 
-// PublicRoute prevents access when logged in.
-const PublicRoute = ({ children, isAuthenticated, ...rest }) => (
-  <Route
-    {...rest}
-    render={({ location }) =>
-      !isAuthenticated ? (
-        children
-      ) : (
-        // If authenticated, redirect away from public routes (home, login, register)
-        <Redirect to="/events" />
-      )
-    }
-  />
-);
+// Authentication wrapper component
+function RequireAuth({ children, isAuthenticated }) {
+  const location = useLocation();
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+  
+  return children;
+}
 
-// PrivateRoute ensures access only when logged in.
-const PrivateRoute = ({ children, isAuthenticated, ...rest }) => (
-  <Route
-    {...rest}
-    render={({ location }) =>
-      isAuthenticated ? (
-        children
-      ) : (
-        // If not authenticated, redirect to home
-        <Redirect to="/" />
-      )
-    }
-  />
-);
+// Public route wrapper
+function PublicRoute({ children, isAuthenticated }) {
+  const location = useLocation();
+
+  if (isAuthenticated) {
+    return <Navigate to="/events" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
 
 function App() {
-  // Lift authentication state into App.
   const [isAuthenticated, setIsAuthenticated] = useState(
     Boolean(localStorage.getItem("authToken"))
   );
 
-  // Optionally, listen for changes to localStorage (if needed)
   useEffect(() => {
     const handleStorageChange = () => {
       setIsAuthenticated(Boolean(localStorage.getItem("authToken")));
@@ -63,45 +53,78 @@ function App() {
     <div>
       <Router>
         <NavBar />
-        <Switch>
-          {/* Public routes: accessible only when NOT logged in */}
-          <PublicRoute exact path="/" isAuthenticated={isAuthenticated}>
-            <Home />
-          </PublicRoute>
-          <PublicRoute path="/login" isAuthenticated={isAuthenticated}>
-            {/* Pass setIsAuthenticated so that Login can update the auth state */}
-            <Login setIsAuthenticated={setIsAuthenticated} />
-          </PublicRoute>
-          <PublicRoute path="/register" isAuthenticated={isAuthenticated}>
-            <Registration />
-          </PublicRoute>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={
+            <PublicRoute isAuthenticated={isAuthenticated}>
+              <Home />
+            </PublicRoute>
+          } />
+          
+          <Route path="/login" element={
+            <PublicRoute isAuthenticated={isAuthenticated}>
+              <Login setIsAuthenticated={setIsAuthenticated} />
+            </PublicRoute>
+          } />
+          
+          <Route path="/register" element={
+            <PublicRoute isAuthenticated={isAuthenticated}>
+              <Registration />
+            </PublicRoute>
+          } />
 
-          {/* Private routes: accessible only when logged in */}
-          <PrivateRoute path="/events/:id" isAuthenticated={isAuthenticated}>
-            <EventDetails />
-          </PrivateRoute>
-          <PrivateRoute path="/events" isAuthenticated={isAuthenticated}>
-            <Events />
-          </PrivateRoute>
-          <PrivateRoute path="/hotels/:id" isAuthenticated={isAuthenticated}>
-            <HotelDetails />
-          </PrivateRoute>
-          <PrivateRoute path="/hotels" isAuthenticated={isAuthenticated}>
-            <Hotels />
-          </PrivateRoute>
-          <PrivateRoute path="/movies/:id" isAuthenticated={isAuthenticated}>
-            <MovieDetails />
-          </PrivateRoute>
-          <PrivateRoute path="/movies" isAuthenticated={isAuthenticated}>
-            <Movies />
-          </PrivateRoute>
-          <PrivateRoute path="/checkout" isAuthenticated={isAuthenticated}>
-            <CheckoutPage />
-          </PrivateRoute>
-          <PrivateRoute path="/contact" isAuthenticated={isAuthenticated}>
-            <Contact />
-          </PrivateRoute>
-        </Switch>
+          {/* Private routes */}
+          <Route path="/events" element={
+            <RequireAuth isAuthenticated={isAuthenticated}>
+              <Events />
+            </RequireAuth>
+          } />
+          
+          <Route path="/events/:id" element={
+            <RequireAuth isAuthenticated={isAuthenticated}>
+              <EventDetails />
+            </RequireAuth>
+          } />
+          
+          <Route path="/hotels" element={
+            <RequireAuth isAuthenticated={isAuthenticated}>
+              <Hotels />
+            </RequireAuth>
+          } />
+          
+          <Route path="/hotels/:id" element={
+            <RequireAuth isAuthenticated={isAuthenticated}>
+              <HotelDetails />
+            </RequireAuth>
+          } />
+          
+          <Route path="/movies" element={
+            <RequireAuth isAuthenticated={isAuthenticated}>
+              <Movies />
+            </RequireAuth>
+          } />
+          
+          <Route path="/movies/:id" element={
+            <RequireAuth isAuthenticated={isAuthenticated}>
+              <MovieDetails />
+            </RequireAuth>
+          } />
+          
+          <Route path="/checkout" element={
+            <RequireAuth isAuthenticated={isAuthenticated}>
+              <CheckoutPage />
+            </RequireAuth>
+          } />
+          
+          <Route path="/contact" element={
+            <RequireAuth isAuthenticated={isAuthenticated}>
+              <Contact />
+            </RequireAuth>
+          } />
+
+          {/* Catch-all redirect */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
         <Footer />
       </Router>
     </div>

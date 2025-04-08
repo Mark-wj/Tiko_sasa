@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const MovieDetails = () => {
+const MovieCast = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`tiko-sasa-backend-production.up.railway.app/api/accounts/movies/${id}/`)
+    // Note the added https:// at the start of the URL
+    fetch(`https://tiko-sasa-backend-production.up.railway.app/api/accounts/movies/${id}/`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch movie data");
@@ -52,4 +53,4 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default MovieCast;
