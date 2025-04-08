@@ -42,10 +42,10 @@ const Footer = () => {
             <div className="space-y-3 md:space-y-4">
               <h4 className="text-base md:text-lg font-semibold text-white">Services</h4>
               <ul className="space-y-2 md:space-y-3">
-                <li><a href="#" className="hover:text-teal-400 transition-colors text-sm md:text-base">Events</a></li>
-                <li><a href="#" className="hover:text-teal-400 transition-colors text-sm md:text-base">Movies</a></li>
-                <li><a href="#" className="hover:text-teal-400 transition-colors text-sm md:text-base">Hotels</a></li>
-                <li><a href="#" className="hover:text-teal-400 transition-colors text-sm md:text-base">Contact</a></li>
+                <li><a href="/events" className="hover:text-teal-400 transition-colors text-sm md:text-base">Events</a></li>
+                <li><a href="/movies" className="hover:text-teal-400 transition-colors text-sm md:text-base">Movies</a></li>
+                <li><a href="/hotels" className="hover:text-teal-400 transition-colors text-sm md:text-base">Hotels</a></li>
+                <li><a href="/contact" className="hover:text-teal-400 transition-colors text-sm md:text-base">Contact</a></li>
               </ul>
             </div>
             <div className="space-y-3 md:space-y-4">
@@ -53,7 +53,7 @@ const Footer = () => {
               <ul className="space-y-2 md:space-y-3">
                 <li><a href="#" className="hover:text-teal-400 transition-colors text-sm md:text-base">FAQ</a></li>
                 <li><a href="#" className="hover:text-teal-400 transition-colors text-sm md:text-base">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-teal-400 transition-colors text-sm md:text-base">Terms of Service</a></li>
+                <li><a href="/assets/Terms of Service.pdf" className="hover:text-teal-400 transition-colors text-sm md:text-base">Terms of Service</a></li>
                 <li><a href="#" className="hover:text-teal-400 transition-colors text-sm md:text-base">Security</a></li>
               </ul>
             </div>

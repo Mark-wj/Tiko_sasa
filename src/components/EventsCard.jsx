@@ -21,7 +21,7 @@ const EventsCard = ({ title, venue, date, price, image }) => {
             <p className="text-sm text-gray-500">Starting from</p>
             <p className="text-2xl font-bold text-indigo-600">KES {price}</p>
           </div>
-          <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-full transition-colors">
+          <button className="bg-gradient-to-r from-rose-500 to-indigo-500 text-white px-6 py-2 rounded-full transition-colors">
             Book Now
           </button>
         </div>

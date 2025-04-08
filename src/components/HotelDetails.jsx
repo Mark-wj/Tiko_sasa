@@ -147,7 +147,7 @@ const HotelDetails = () => {
           <div className="border-b pb-6 mb-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-gray-900">Booking Details</h2>
-              <span className="text-xl font-bold text-blue-600">
+              <span className="text-xl font-bold text-rose-600">
     KES {price.toFixed(2)}
   </span>
             </div>
@@ -195,13 +195,13 @@ const HotelDetails = () => {
           <div className="space-y-6">
             <div className="flex justify-between items-center bg-gray-50 p-4 rounded-xl">
               <span className="font-bold text-lg">Total</span>
-              <span className="text-2xl font-bold text-blue-600">
+              <span className="text-2xl font-bold text-rose-600">
                 KES {total.toFixed(2)}
               </span>
             </div>
             <button
               onClick={handleCheckout}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow hover:scale-[1.02] transform duration-200"
+              className="w-full bg-gradient-to-r from-indigo-600 to-rose-600 text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow hover:scale-[1.02] transform duration-200"
             >
               Proceed to Checkout
             </button>

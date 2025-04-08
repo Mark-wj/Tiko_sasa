@@ -103,31 +103,43 @@ const Movies = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Now Showing
-          </h1>
-          <div className="relative max-w-2xl mx-auto">
-            <div className="flex items-center bg-white rounded-full shadow-lg">
-              <FiSearch className="ml-4 text-gray-400" size={24} />
-              <input
-                type="text"
-                className="w-full py-4 px-4 rounded-full focus:outline-none text-gray-800"
-                placeholder="Search movies by title, genre, or actor..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button
-                onClick={() => setIsFiltersOpen(!isFiltersOpen)}
-                className="mr-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
-              >
-                <FiFilter className="text-gray-600" size={24} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div className="relative py-20 px-4 text-white">
+       {/* Background Image & Overlay */}
+       <div className="absolute inset-0">
+         <img
+           src="https://tinyurl.com/4bzh4tyj"      
+           alt="Now Showing background"
+           className="w-full h-full object-cover"
+         />
+         <div className="absolute inset-0 bg-black opacity-50" />
+       </div>
+     
+       {/* Content */}
+       <div className="relative max-w-7xl mx-auto text-center">
+         <h1 className="text-4xl md:text-6xl font-bold mb-6">
+           Now Showing
+         </h1>
+         <div className="relative max-w-2xl mx-auto">
+           <div className="flex items-center bg-white rounded-full shadow-lg">
+             <FiSearch className="ml-4 text-gray-400" size={24} />
+             <input
+               type="text"
+               className="w-full py-4 px-4 rounded-full focus:outline-none text-gray-800"
+               placeholder="Search movies by title, genre, or actor..."
+               value={searchQuery}
+               onChange={(e) => setSearchQuery(e.target.value)}
+             />
+             <button
+               onClick={() => setIsFiltersOpen(!isFiltersOpen)}
+               className="mr-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+             >
+               <FiFilter className="text-gray-600" size={24} />
+             </button>
+           </div>
+         </div>
+       </div>
+     </div>
+
 
       {/* Filters Sidebar */}
       <div className={`fixed inset-y-0 left-0 w-80 bg-white shadow-xl z-50 transform 
