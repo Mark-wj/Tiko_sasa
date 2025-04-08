@@ -1,38 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useLocation
+} from "react-router-dom";
+
+import NavBar from "./components/NavBar.jsx";
+import Footer from "./components/Footer.jsx";
+
 import Home from './pages/Home';
 import Events from './pages/Events';
 import Hotels from './pages/Hotels';
 import Movies from './pages/Movies';
-import NavBar from "./components/NavBar.jsx";
+import Contact from './pages/Contact.jsx';
+import CheckoutPage from "./pages/checkoutPage.jsx";
+
 import Login from "./components/Login.jsx";
 import Registration from "./components/Registration.jsx";
+
 import EventDetails from "./components/EventDetails.jsx";
 import HotelDetails from "./components/HotelDetails.jsx";
 import MovieDetails from "./components/MovieDetails.jsx";
-import CheckoutPage from "./pages/checkoutPage.jsx";
-import Footer from "./components/Footer.jsx";
-import Contact from './pages/Contact.jsx';
 
-// Authentication wrapper component
+
+// Protects private routes; if not authed → send to /login
 function RequireAuth({ children, isAuthenticated }) {
   const location = useLocation();
-  
   if (!isAuthenticated) {
-    return <Navigate to="/" state={{ from: location }} replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  
   return children;
 }
 
-// Public route wrapper
+// Prevents logged‑in users from seeing /login or /register
 function PublicRoute({ children, isAuthenticated }) {
-  const location = useLocation();
-
   if (isAuthenticated) {
-    return <Navigate to="/events" state={{ from: location }} replace />;
+    return <Navigate to="/" replace />;
   }
-
   return children;
 }
 
@@ -41,93 +47,125 @@ function App() {
     Boolean(localStorage.getItem("authToken"))
   );
 
+  // Keep auth state in sync if another tab logs you in/out
   useEffect(() => {
-    const handleStorageChange = () => {
+    const onStorage = () => {
       setIsAuthenticated(Boolean(localStorage.getItem("authToken")));
     };
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
   }, []);
 
   return (
-    <div>
-      <Router>
-        <NavBar />
-        <Routes>
-          {/* Public routes */}
-          <Route path="/" element={
-            <PublicRoute isAuthenticated={isAuthenticated}>
-              <Home />
-            </PublicRoute>
-          } />
-          
-          <Route path="/login" element={
+    <Router>
+      <NavBar />
+
+      <Routes>
+        {/* Public-only pages */}
+        <Route
+          path="/login"
+          element={
             <PublicRoute isAuthenticated={isAuthenticated}>
               <Login setIsAuthenticated={setIsAuthenticated} />
             </PublicRoute>
-          } />
-          
-          <Route path="/register" element={
+          }
+        />
+
+        <Route
+          path="/register"
+          element={
             <PublicRoute isAuthenticated={isAuthenticated}>
               <Registration />
             </PublicRoute>
-          } />
+          }
+        />
 
-          {/* Private routes */}
-          <Route path="/events" element={
+        {/* Home now requires auth */}
+        <Route
+          path="/"
+          element={
+            <RequireAuth isAuthenticated={isAuthenticated}>
+              <Home />
+            </RequireAuth>
+          }
+        />
+
+        {/* All other private routes */}
+        <Route
+          path="/events"
+          element={
             <RequireAuth isAuthenticated={isAuthenticated}>
               <Events />
             </RequireAuth>
-          } />
-          
-          <Route path="/events/:id" element={
+          }
+        />
+        <Route
+          path="/events/:id"
+          element={
             <RequireAuth isAuthenticated={isAuthenticated}>
               <EventDetails />
             </RequireAuth>
-          } />
-          
-          <Route path="/hotels" element={
+          }
+        />
+
+        <Route
+          path="/hotels"
+          element={
             <RequireAuth isAuthenticated={isAuthenticated}>
               <Hotels />
             </RequireAuth>
-          } />
-          
-          <Route path="/hotels/:id" element={
+          }
+        />
+        <Route
+          path="/hotels/:id"
+          element={
             <RequireAuth isAuthenticated={isAuthenticated}>
               <HotelDetails />
             </RequireAuth>
-          } />
-          
-          <Route path="/movies" element={
+          }
+        />
+
+        <Route
+          path="/movies"
+          element={
             <RequireAuth isAuthenticated={isAuthenticated}>
               <Movies />
             </RequireAuth>
-          } />
-          
-          <Route path="/movies/:id" element={
+          }
+        />
+        <Route
+          path="/movies/:id"
+          element={
             <RequireAuth isAuthenticated={isAuthenticated}>
               <MovieDetails />
             </RequireAuth>
-          } />
-          
-          <Route path="/checkout" element={
+          }
+        />
+
+        <Route
+          path="/checkout"
+          element={
             <RequireAuth isAuthenticated={isAuthenticated}>
               <CheckoutPage />
             </RequireAuth>
-          } />
-          
-          <Route path="/contact" element={
+          }
+        />
+
+        <Route
+          path="/contact"
+          element={
             <RequireAuth isAuthenticated={isAuthenticated}>
               <Contact />
             </RequireAuth>
-          } />
+          }
+        />
 
-          {/* Catch-all redirect */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </div>
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+
+      <Footer />
+    </Router>
   );
 }
 

@@ -46,7 +46,7 @@ const Login = ({ setIsAuthenticated }) => {
         storage.setItem('refreshToken', data.refresh);
         
         setIsAuthenticated(true);
-        navigate('/events');
+        navigate('/');
       } else {
         setMessage(data.detail || 'Invalid email or password');
       }

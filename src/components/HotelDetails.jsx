@@ -185,10 +185,6 @@ const HotelDetails = () => {
               <span className="text-gray-600">Taxes (10%)</span>
               <span className="font-medium">KES {taxesDisplay}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Shipping</span>
-              <span className="font-medium">KES {shippingDisplay}</span>
-            </div>
           </div>
 
           {/* Total and Checkout */}

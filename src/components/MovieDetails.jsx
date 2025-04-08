@@ -177,10 +177,6 @@ const MovieDetails = () => {
                       <span className="text-gray-400">Taxes (10%)</span>
                       <span className="text-rose-400">KES {taxesDisplay}</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Shipping</span>
-                      <span className="text-rose-400">FREE</span>
-                    </div>
                     <hr className="border-gray-300 my-3" />
                     <div className="flex justify-between text-xl font-bold">
                       <span className="text-gray-500">Total</span>

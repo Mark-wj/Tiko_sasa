@@ -96,15 +96,6 @@ const NavBar = () => {
                 ))}
               </div>
 
-              <div className="mt-auto pt-8 border-t">
-                <Link
-                  to="/login"
-                  onClick={closeMenu}
-                  className="w-full bg-gradient-to-r from-blue-600 to-teal-600 text-white py-3 px-6 rounded-full text-center font-semibold hover:shadow-lg transition-shadow"
-                >
-                  Get Started
-                </Link>
-              </div>
             </div>
           </div>
         </div>
