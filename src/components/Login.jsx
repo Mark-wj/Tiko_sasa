@@ -32,7 +32,7 @@ const Login = ({ setIsAuthenticated }) => {
     setIsLoading(true);
 
     try {
-      const res = await fetch('https://tiko-sasa-backend-production.up.railway.app/api/accounts/login/', {
+      const res = await fetch('https://tiko-sasa-backend.onrender.com/api/accounts/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),

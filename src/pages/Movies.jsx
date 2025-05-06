@@ -65,7 +65,7 @@ const Movies = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("https://tiko-sasa-backend-production.up.railway.app/api/accounts/movies/")
+    fetch("https://tiko-sasa-backend.onrender.com/api/accounts/movies/")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch movies");
         return res.json();

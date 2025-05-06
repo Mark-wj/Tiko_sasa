@@ -10,7 +10,7 @@ const MovieDetails = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch(`https://tiko-sasa-backend-production.up.railway.app/api/accounts/movies/${id}`)
+    fetch(`https://tiko-sasa-backend.onrender.com/api/accounts/movies/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch Data");

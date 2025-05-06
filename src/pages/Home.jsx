@@ -29,9 +29,9 @@ const Home = () => {
   };
   
   useEffect(() => {
-    fetchData("https://tiko-sasa-backend-production.up.railway.app/api/accounts/movies/", setMovies);
-    fetchData("https://tiko-sasa-backend-production.up.railway.app/api/accounts/events/", setEvents, -4); // last 4
-    fetchData("https://tiko-sasa-backend-production.up.railway.app/api/accounts/hotels/", setHotels);
+    fetchData("https://tiko-sasa-backend.onrender.com/api/accounts/movies/", setMovies);
+    fetchData("https://tiko-sasa-backend.onrender.com/api/accounts/events/", setEvents, -4); // last 4
+    fetchData("https://tiko-sasa-backend.onrender.com/api/accounts/hotels/", setHotels);
   }, []);
   
 

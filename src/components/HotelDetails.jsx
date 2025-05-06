@@ -16,7 +16,7 @@ const HotelDetails = () => {
     if (!id) return;
     
     // Fetch hotel details including gallery images from the hotel serializer
-    fetch(`https://tiko-sasa-backend-production.up.railway.app/api/accounts/hotels/${id}`)
+    fetch(`https://tiko-sasa-backend.onrender.com/api/accounts/hotels/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch hotel data");

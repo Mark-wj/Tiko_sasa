@@ -15,7 +15,7 @@ const EventDetails = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch("https://tiko-sasa-backend-production.up.railway.app/api/accounts/events/")
+    fetch("https://tiko-sasa-backend.onrender.com/api/accounts/events/")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch event details");
